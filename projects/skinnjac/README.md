@@ -1,1 +1,1 @@
-Jacob Skinner - skinnjac
+This is my assignment-1 submission!
