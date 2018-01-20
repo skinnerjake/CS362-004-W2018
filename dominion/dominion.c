@@ -1271,7 +1271,8 @@ int playSmithy(int currentPlayer, int handPos, struct gameState *state) {
 	int i;
 	for (i = 0; i < 3; i++)
 		drawCard(currentPlayer, state);
-	discardCard(handPos, currentPlayer, state, 0);
+	// should be discardCard(handPos, ...)
+	discardCard(0, currentPlayer, state, 0);
 	return 0;
 }
 
@@ -1294,7 +1295,7 @@ int playAdventurer(struct gameState *state, int currentPlayer) {
 			temphand[z] = cardDrawn;
 			//this should just remove the top card (the most recently drawn one).
 			state->handCount[currentPlayer]--;
-			z++;
+			//z++;
 		}
 	}
 	
@@ -1334,12 +1335,13 @@ int playVillage(struct gameState* state, int currentPlayer, int handPos) {
 	//+2 Actions
 	state->numActions = state->numActions + 2;
 	//discard played card from hand
-	discardCard(handPos, currentPlayer, state, 0);
+	//discardCard(handPos, currentPlayer, state, 0);
 	return 0;
 }
 
 int playGardens() {
-	return -1;
+	// should return -1
+	return 0;
 }
 
 //end of dominion.c
