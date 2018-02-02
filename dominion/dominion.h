@@ -16,16 +16,16 @@
 /* hand# means index of a card in current active player's hand */
 
 enum CARD
-  {curse = 0,
+  {curse = 0, // 0
    estate,
    duchy,
    province,
 
-   copper,
+   copper,		// 4
    silver,
    gold,
 
-   adventurer,
+   adventurer,	// 7
    /* If no/only 1 treasure found, stop when full deck seen */
    council_room,
    feast, /* choice1 is supply # of card gained) */
@@ -36,6 +36,7 @@ enum CARD
    smithy,
    village,
 
+	//15
    baron, /* choice1: boolean for discard of estate */
    /* Discard is always of first (lowest index) estate */
    great_hall,
@@ -43,6 +44,7 @@ enum CARD
    steward, /* choice1: 1 = +2 card, 2 = +2 coin, 3 = trash 2 (choice2,3) */
    tribute,
 
+   // 20
    ambassador, /* choice1 = hand#, choice2 = number to return to supply */
    cutpurse,
    embargo, /* choice1 = supply# */
@@ -131,11 +133,11 @@ int getWinners(int players[MAX_PLAYERS], struct gameState *state);
 // NEW: card function definitions
 int playSmithy(int currentPlayer, int handPos, struct gameState *state);
  
-int playAdventurer(struct gameState *state, int currentPlayer);
+int playAdventurer(int currentPlayer, int handPos, struct gameState *state);
  
-int playMine(struct gameState *state, int currentPlayer, int choice1, int choice2, int handPos);
+int playMine(int currentPlayer, int choice1, int choice2, int handPos, struct gameState *state);
 
-int playVillage(struct gameState* state, int currentPlayer, int handPos);
+int playVillage(int currentPlayer, int handPos, struct gameState* state);
 
 int playGardens();
 
