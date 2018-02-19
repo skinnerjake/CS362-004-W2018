@@ -1264,6 +1264,8 @@ int playAdventurer(int currentPlayer, int handPos, struct gameState *state) {
 	int drawntreasure = 0; 
 	int temphand[MAX_HAND];
 	
+	discardCard(handPos, currentPlayer, state, 0);
+	
 	while (drawntreasure < 2) {
 		//if the deck is empty we need to shuffle discard and add to deck
 		if (state->deckCount[currentPlayer] < 1)
@@ -1277,14 +1279,13 @@ int playAdventurer(int currentPlayer, int handPos, struct gameState *state) {
 			temphand[z] = cardDrawn;
 			//this should just remove the top card (the most recently drawn one).
 			state->handCount[currentPlayer]--;
-			//z++;
+			z++;
 		}
 	}
 	
 	while (z-1 >= 0)
 		state->discard[currentPlayer][state->discardCount[currentPlayer]++] = temphand[--z];
 	
-	//discardCard(handPos, currentPlayer, state, 0);
 	return 0;
 }
 
@@ -1305,7 +1306,7 @@ int playMine(int currentPlayer, int choice1, int choice2, int handPos, struct ga
 	discardCard(handPos, currentPlayer, state, 0);
 	for (i = 0; i < state->handCount[currentPlayer]; i++)
 		if (state->hand[currentPlayer][i] == j) {
-			discardCard(i, currentPlayer, state, 0);
+			discardCard(i, currentPlayer, state, 1);
 			break;
 		}
 		

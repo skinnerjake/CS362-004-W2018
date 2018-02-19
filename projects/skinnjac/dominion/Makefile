@@ -6,9 +6,21 @@ rngs.o: rngs.h rngs.c
 dominion.o: dominion.h dominion.c rngs.o
 	gcc -c dominion.c -g  $(CFLAGS)
 
+randomtesting.o: dominion_helpers.h randomtesting.h dominion.o
+	gcc -c randomtesting.c -g $(CFLAGS)
+
 playdom: dominion.o playdom.c
 	gcc -o playdom playdom.c -g dominion.o rngs.o $(CFLAGS)
 #To run playdom you need to entere: ./playdom <any integer number> like ./playdom 10*/
+
+randomtestcard1: randomtestcard1.c randomtesting.o dominion.o rngs.o
+	gcc -o randomtestcard1 -g randomtestcard1.c randomtesting.o dominion.o rngs.o $(CFLAGS)
+
+randomtestcard2: randomtestcard1.c randomtesting.o dominion.o rngs.o
+	gcc -o randomtestcard2 -g randomtestcard2.c randomtesting.o dominion.o rngs.o $(CFLAGS)
+	
+randomtestadventurer: randomtestadventurer.c randomtesting.o dominion.o rngs.o
+	gcc -o randomtestadventurer -g randomtestadventurer.c randomtesting.o dominion.o rngs.o $(CFLAGS)
 
 cardtest1: cardtest1.c dominion.o rngs.o
 	gcc -o cardtest1 -g cardtest1.c dominion.o rngs.o $(CFLAGS)
@@ -89,6 +101,33 @@ unittestresults.out: unittest1.c unittest2.c unittest3.c unittest4.c cardtest1.c
 	gcc -o cardtest4 -g cardtest4.c dominion.o rngs.o $(CFLAGS) 
 	./cardtest4 >> unittestresults.out
 	gcov -abcfu dominion.c >> unittestresults.out
+	
+randomtestcard1.out: randomtestcard1.c randomtesting.o dominion.o rngs.o
+	echo "Result for random-testing Mine Card:" > randomtestcard1.out
+	
+	echo "randomtestcard1.c:" >> randomtestcard1.out
+	gcc -o randomtestcard1 -g randomtestcard1.c randomtesting.o dominion.o rngs.o $(CFLAGS) 
+	
+	./randomtestcard1 >> randomtestcard1.out
+	gcov -abcfu dominion.c >> randomtestcard1.out
+	
+randomtestcard2.out: randomtestcard2.c randomtesting.o dominion.o rngs.o
+	echo "Result for random-testing Village Card:" > randomtestcard2.out
+	
+	echo "randomtestcard2.c:" >> randomtestcard2.out
+	gcc -o randomtestcard2 -g randomtestcard2.c randomtesting.o dominion.o rngs.o $(CFLAGS) 
+	
+	./randomtestcard2 >> randomtestcard2.out
+	gcov -abcfu dominion.c >> randomtestcard2.out
+	
+randomtestadventurer.out: randomtestadventurer.c randomtesting.o dominion.o rngs.o
+	echo "Result for random-testing Adventurer Card:" > randomtestadventurer.out
+	
+	echo "randomtestadventurer.c:" >> randomtestadventurer.out
+	gcc -o randomtestadventurer -g randomtestadventurer.c randomtesting.o dominion.o rngs.o $(CFLAGS) 
+	
+	./randomtestadventurer >> randomtestadventurer.out
+	gcov -abcfu dominion.c >> randomtestadventurer.out
 	
 player: player.c interface.o
 	gcc -o player player.c -g  dominion.o rngs.o interface.o $(CFLAGS)
