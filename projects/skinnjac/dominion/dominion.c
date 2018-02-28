@@ -1279,7 +1279,9 @@ int playAdventurer(int currentPlayer, int handPos, struct gameState *state) {
 			temphand[z] = cardDrawn;
 			//this should just remove the top card (the most recently drawn one).
 			state->handCount[currentPlayer]--;
-			z++;
+			
+			// Removed iterator; temphand[] will not be added back to the hand;
+			//z++;
 		}
 	}
 	
