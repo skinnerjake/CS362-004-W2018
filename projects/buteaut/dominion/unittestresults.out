@@ -1,0 +1,284 @@
+Result for unit and card function tests:
+unittest1.c:
+---Running tests for 'handCard()'---
+
+TEST #1: after initializeGame()
+Testing handCard on all cards in hand: PASSED
+
+TEST #2: after gaining another card into hand
+Testing handCard on all cards in hand: PASSED
+
+TEST #3: end turn, new player's hand
+Testing handCard on all cards in hand: PASSED
+unittest2.c:
+
+---Running tests for 'fullDeckCount()'---
+
+Test 1: count from initialized deck (7 copper)
+Testing for card #4: PASSED: got 7, expected 7
+
+Test 2: count after adding an existing card (+1 copper)
+Testing for card #4: PASSED: got 8, expected 8
+
+Test 3: count after adding a new card (smithy)
+Testing for card #13: PASSED: got 1, expected 1
+
+Test 4: count after trashing card (-1 copper)
+Testing for card #4: PASSED: got 7, expected 7
+
+Test 5: count card not in the deck or supply (remodel)
+Testing for card #12: PASSED: got 0, expected 0
+
+Test 6: count card for player other than current (smithy = 0) 
+Testing for card #13: PASSED: got 0, expected 0
+
+Test 7: test for a card that doesn't exist (>26)
+Testing for card #30: PASSED: got 0, expected 0
+unittest3.c:
+
+---Running tests for 'endTurn()'---
+Test 1: end turn after initialization
+	ending turn...
+	Testing value is correct: PASSED
+	Testing player incremented correctly: PASSED
+	Testing previous player's hand reset: PASSED
+	Testing previous player handcount = 0: PASSED
+	Testing phase reset: PASSED
+	Testing numActions reset: PASSED
+	Testing numBuys reset: PASSED
+	Testing playedCardCount reset: PASSED
+	Testing new player drew cards: PASSED
+Test 2: end different player's turn after making moves
+	ending turn...
+	Testing value is correct: PASSED
+	Testing player incremented correctly: PASSED
+	Testing previous player's hand reset: PASSED
+	Testing previous player handcount = 0: PASSED
+	Testing phase reset: PASSED
+	Testing numActions reset: PASSED
+	Testing numBuys reset: PASSED
+	Testing playedCardCount reset: PASSED
+	Testing new player drew cards: PASSED
+Test 3: set different values to make sure they reset
+	ending turn...
+	Testing value is correct: PASSED
+	Testing player incremented correctly: PASSED
+	Testing previous player's hand reset: PASSED
+	Testing previous player handcount = 0: PASSED
+	Testing phase reset: PASSED
+	Testing numActions reset: PASSED
+	Testing numBuys reset: PASSED
+	Testing playedCardCount reset: PASSED
+	Testing new player drew cards: PASSED
+unittest4.c:
+TESTING 'isGameOver()':
+
+TEST 1: all supplies empty (game should end):
+Testing if game is over: PASSED: got 1, expected 1
+TEST 2: 3 supply (not province) are empty (game should end):
+Testing if game is over: PASSED: got 1, expected 1
+TEST 3: only province supply is empty (game should end):
+Testing if game is over: PASSED: got 1, expected 1
+TEST 4: all supply have cards (game should continue):
+Testing if game is over: PASSED: got 0, expected 0
+TEST 5: two supply (not province) are empty (game should continue):
+Testing if game is over: PASSED: got 0, expected 0
+cardtest1.c:
+---Running tests for 'playSmithy()'---
+
+Test case 1: one smithy in hand, played normally
+Testing card was removed from hand and played: PASSED
+Testing new cards were added: FAILED
+Testing the played card is the SMITHY card: PASSED
+
+Test case 2: play card that isn't smithy (should fail)
+Testing card was removed from hand and played: FAILED
+Testing new cards were added: FAILED
+Testing the played card is the SMITHY card: FAILED
+
+Test case 3: multiple smithies in hand, only one played
+Testing card was removed from hand and played: PASSED
+Testing new cards were added: FAILED
+Testing the played card is the SMITHY card: PASSED
+cardtest2.c:
+---Running tests for 'playAdventurer()'---
+
+Test case 1: one adventurer in hand, played normally
+Testing all cards are present between deck and discard: FAILED
+Testing played card was adventurer: FAILED
+Testing hand has new cards added: FAILED
+Testing new cards in hand are treasures: PASSED
+
+Test case 2: play card that isn't adventurer (should fail)
+Testing all cards are present between deck and discard: FAILED
+Testing played card was adventurer: FAILED
+Testing hand has new cards added: FAILED
+Testing new cards in hand are treasures: PASSED
+
+Test case 3: several cards in deck are discarded
+Testing all cards are present between deck and discard: FAILED
+Testing played card was adventurer: FAILED
+Testing hand has new cards added: FAILED
+Testing new cards in hand are treasures: PASSED
+cardtest3.c:
+---Running tests for 'playVillage()'---
+
+Test case 1: one village in hand, played normally
+Testing the return value is correct: PASSED
+Testing the number of cards in hand is correct: PASSED
+Testing the number of actions increased by 2: FAILED
+Testing the last played card is a village: PASSED
+
+Test case 2: play wrong card (should fail)
+Testing the return value is correct: PASSED
+Testing the number of cards in hand is correct: PASSED
+Testing the number of actions increased by 2: FAILED
+Testing the last played card is a village: FAILED
+
+Test case 3: set actions to 0 (should still play)
+Testing the return value is correct: PASSED
+Testing the number of cards in hand is correct: PASSED
+Testing the number of actions increased by 2: FAILED
+Testing the last played card is a village: PASSED
+Function 'updateCoins'
+Lines executed:100.00% of 11
+No branches
+No calls
+
+Function 'gainCard'
+Lines executed:100.00% of 13
+No branches
+No calls
+
+Function 'discardCard'
+Lines executed:92.31% of 13
+No branches
+No calls
+
+Function 'villagePlay'
+Lines executed:100.00% of 6
+No branches
+No calls
+
+Function 'smithyPlay'
+Lines executed:100.00% of 6
+No branches
+No calls
+
+Function 'remodelPlay'
+Lines executed:0.00% of 12
+No branches
+No calls
+
+Function 'minePlay'
+Lines executed:0.00% of 16
+No branches
+No calls
+
+Function 'adventurerPlay'
+Lines executed:100.00% of 18
+No branches
+No calls
+
+Function 'cardEffect'
+Lines executed:0.00% of 195
+No branches
+No calls
+
+Function 'getCost'
+Lines executed:0.00% of 30
+No branches
+No calls
+
+Function 'drawCard'
+Lines executed:100.00% of 22
+No branches
+No calls
+
+Function 'getWinners'
+Lines executed:0.00% of 24
+No branches
+No calls
+
+Function 'scoreFor'
+Lines executed:0.00% of 24
+No branches
+No calls
+
+Function 'isGameOver'
+Lines executed:100.00% of 10
+No branches
+No calls
+
+Function 'endTurn'
+Lines executed:100.00% of 20
+No branches
+No calls
+
+Function 'whoseTurn'
+Lines executed:100.00% of 2
+No branches
+No calls
+
+Function 'fullDeckCount'
+Lines executed:88.89% of 9
+No branches
+No calls
+
+Function 'supplyCount'
+Lines executed:100.00% of 2
+No branches
+No calls
+
+Function 'handCard'
+Lines executed:100.00% of 3
+No branches
+No calls
+
+Function 'numHandCards'
+Lines executed:100.00% of 2
+No branches
+No calls
+
+Function 'buyCard'
+Lines executed:0.00% of 13
+No branches
+No calls
+
+Function 'playCard'
+Lines executed:0.00% of 14
+No branches
+No calls
+
+Function 'shuffle'
+Lines executed:100.00% of 16
+No branches
+No calls
+
+Function 'initializeGame'
+Lines executed:83.87% of 62
+No branches
+No calls
+
+Function 'kingdomCards'
+Lines executed:0.00% of 13
+No branches
+No calls
+
+Function 'newGame'
+Lines executed:100.00% of 3
+No branches
+No calls
+
+Function 'compare'
+Lines executed:100.00% of 6
+No branches
+No calls
+
+File 'dominion.c'
+Lines executed:37.52% of 565
+Branches executed:28.78% of 417
+Taken at least once:26.38% of 417
+Calls executed:23.00% of 100
+Creating 'dominion.c.gcov'
+

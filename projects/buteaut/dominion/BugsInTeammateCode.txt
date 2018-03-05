@@ -1,0 +1,51 @@
+The obvious bug in this function is the error in the (for...) loop. It should read (for i = 0; i < 3; i++). This correction allows the test to pass all of the tests.
+
+int smithyPlay(struct gameState *state, int handPos) {
+	int i;
+	int currentPlayer = whoseTurn(state);
+
+	for(i=0; i<1; i++) { 
+		drawCard(currentPlayer, state);
+	}
+	//discard card from hand
+	discardCard(handPos, currentPlayer, state, 0);
+	return 0;
+}
+
+
+
+The obvious bug, besides the fact it was commented, was the looping error again: the function was looking for and adding 4 treasure cards instead of only 2. This could have several problems: besides not being correctly implemented, by increasing the number of required treasure cards to return, you run the risk of not having enough to go into the hand. This is a problem because the loop has no failsafe for this scenario and would just continue to loop indefinitely. 
+
+However, after fixing this bug, the function still failed several tests. This is primarily because it doesn’t discard the adventurer card like many of the other functions. I believe this is necessary, and also a bug that was original in the code and not introduced by Mr. Buteau. In order to fix this, you would need to take the hand position of the adventurer card as an argument, and discard it into the played pile before returning from the function. This fix resulted in a complete pass rate.
+
+
+int adventurerPlay(struct gameState *state) {
+	int currentPlayer = whoseTurn(state);
+	int temphand[MAX_HAND];
+	int drawntreasure = 0;
+	int cardDrawn;
+	int z = 0;
+	while(drawntreasure<4) {
+		if(state->deckCount[currentPlayer] < 1){ //if the deck is empty we need to shuffle
+							//discard and add to deck
+			shuffle(currentPlayer, state);
+		}
+		drawCard(currentPlayer, state);
+		cardDrawn = state->hand[currentPlayer][state->handCount[currentPlayer]-1];
+		if(cardDrawn == copper || cardDrawn == silver || cardDrawn == gold) {
+			drawntreasure++;
+		}
+		else {
+			temphand[z] = cardDrawn;
+			state->handCount[currentPlayer]--; //this should just remove the top card
+								//(the most recently drawn one).
+			z++;
+		}
+	}
+	while(z-1>=0){
+		state->discard[currentPlayer][state->discardCount[currentPlayer]++]=temphand[z-1]; 
+		//discard all cards in play that have been drawn
+		z = z - 1;
+	}
+	return 0;
+}
