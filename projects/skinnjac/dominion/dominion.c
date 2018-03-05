@@ -1281,7 +1281,7 @@ int playAdventurer(int currentPlayer, int handPos, struct gameState *state) {
 			state->handCount[currentPlayer]--;
 			
 			// Removed iterator; temphand[] will not be added back to the hand;
-			//z++;
+			z++;
 		}
 	}
 	
